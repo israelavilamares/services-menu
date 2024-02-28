@@ -1,0 +1,59 @@
+#!/bin/sh
+
+
+
+mostrar()
+{
+read -p  "pon la ruta se va alistar " path
+  cd $path
+ls
+}
+
+crearArcvhivo()
+{
+	read -p "pon una frase o palabra que quieras poner un archivo: " word
+	echo  $word > notas.txt
+}
+
+diferencia()
+{
+	echo "cuales archivos quieres comparar pon la ruta completa :"
+   	read -p "file1: "  archivo1 
+	read -p "file2: " archivo2
+	diff $archivo1 $archivo2
+}
+
+buscarText()
+{
+	echo "aqui buscaras una palabra importante dentro de archivo"
+	read -p "que archivo buscas: "  file
+	read -p "que palabra buscas: " word
+	awk "/$word/ {print}" $file
+
+}
+
+buscarPath()
+{
+	echo "busca concidencias de un archivo. "
+        read -p "que palabra buscas: " word
+	read -p "que palabra buscas: "  path
+	grep  -n  $word  $path
+}
+
+
+
+
+while true; do
+    read -p "Seleccione una opción de 1 a 5 ?" op
+    case $op in
+        [1]* )  mostrar;   break;;
+        [2]* ) crearArcvhivo; break;;
+        [3]* ) diferencia; break;;
+        [4]* ) buscarText; break;;
+        [5]* ) buscarPath; break;;        
+        * ) echo "Seleccione una Opción de 1 a 5.";;
+    esac
+done
+
+
+
